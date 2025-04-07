@@ -18,7 +18,6 @@ def call(body){
                         cd $WORKSPACE/simple-java-maven-app
                         pwd
                         mvn -B -DskipTests clean package
-
                     """
                 }
             }
