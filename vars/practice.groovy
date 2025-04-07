@@ -45,7 +45,7 @@ def call(body){
             stage ('Deliver') {
                 steps {
                     echo "Delivering the product"
-                    sh '$REPO_PATH/jenkins/scripts/deliver.sh -p '
+                    sh '$REPO_PATH/jenkins/scripts/deliver.sh -p $TARGET_F_PATH'
                 }
             }
         }
