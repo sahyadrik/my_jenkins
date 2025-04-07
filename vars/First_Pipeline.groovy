@@ -1,5 +1,5 @@
 pipeline {
-    agent Node_Pi  // Run on any available agent
+    agent { label 'node_1' }
 
     stages {
         stage('Checkout') {
