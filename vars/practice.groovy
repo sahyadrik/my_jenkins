@@ -6,6 +6,8 @@ def call(body){
         }
         environment{
             GIT_ACCOUNT = credentials('Git')
+            REPO_PATH = "$WORKSPACE/simple-java-maven-app"
+            TARGET_F_PATH = "$WORKSPACE/simple-java-maven-app/target"
         }
         stages{            
             stage ('Checkout') {
@@ -19,7 +21,7 @@ def call(body){
                 steps {
                     echo "Building with maven"
                     sh """
-                        cd $WORKSPACE/simple-java-maven-app
+                        cd $REPO_PATH
                         pwd
                         /opt/maven/bin/mvn -B -DskipTests clean package
                     """
@@ -29,7 +31,7 @@ def call(body){
                 steps {
                     echo "Running the Tests"
                     sh """ 
-                        cd $WORKSPACE/simple-java-maven-app
+                        cd $REPO_PATH
                         pwd
                         /opt/maven/bin/mvn test 
                     """
@@ -43,7 +45,7 @@ def call(body){
             stage ('Deliver') {
                 steps {
                     echo "Delivering the product"
-                    sh '$WORKSPACE/simple-java-maven-app/jenkins/scripts/deliver.sh'
+                    sh '$REPO_PATH/jenkins/scripts/deliver.sh -p '
                 }
             }
         }
