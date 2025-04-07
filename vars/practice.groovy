@@ -8,6 +8,7 @@ def call(body){
             stage ('Checkout') {
                 steps {
                     echo "Checking out the git repository"
+                    echo $GIT_ACCOUNT
                     sh "git clone --recursive https://github.com/sahyadrik/my_jenkins.git"  
                 }
             }
