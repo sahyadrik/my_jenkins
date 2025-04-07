@@ -51,7 +51,7 @@ def call(body){
             stage ('Deploy') {
                 steps {
                     echo "Deploying the package to Tomcat"
-                    withCredentials ([usernamePassword(credentialsId:'tomcat_pi'), usernameVariable: 'TOMCAT_USER', passwordVariable: 'TOMCAT_PASS')]) {
+                    withCredentials ([usernamePassword(credentialsId:'tomcat_pi'), usernameVariable: 'TOMCAT_USER', passwordVariable: 'TOMCAT_PASS']) {
                     sh """
                         WAR_FILE=\$(ls $TARGET_F_PATH/*.war | head -n 1)
                         echo "Deploying \$WAR_FILE to Tomcat..."
