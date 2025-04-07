@@ -25,7 +25,11 @@ def call(body){
             stage ('Test') {
                 steps {
                     echo "Running the Tests"
-                    sh ' /opt/maven/bin/mvn test '
+                    sh """ 
+                        cd $WORKSPACE/simple-java-maven-app
+                        pwd
+                        /opt/maven/bin/mvn test 
+                    """
                 }
                 post{
                     always {
