@@ -18,7 +18,7 @@ def call(body){
                     sh """
                         cd $WORKSPACE/simple-java-maven-app
                         pwd
-                        mvn -B -DskipTests clean package
+                        /opt/maven/bin/mvn -B -DskipTests clean package
                     """
                 }
             }
