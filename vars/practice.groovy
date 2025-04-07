@@ -43,7 +43,7 @@ def call(body){
             stage ('Deliver') {
                 steps {
                     echo "Delivering the product"
-                    sh './jenkins/scripts/deliver.sh'
+                    sh '$WORKSPACE/simple-java-maven-app/jenkins/scripts/deliver.sh'
                 }
             }
         }
