@@ -1,11 +1,14 @@
 def call(body){
     pipeline{
         agent{ label 'node_1'}
-
+        environment{
+            GIT_ACCOUNT = credentials('Git')
+        }
         stages{
             stage ('Checkout') {
                 steps {
                     echo "Checking out the git repository"
+                    sh "git clone --recursive https://github.com/sahyadrik/my_jenkins.git"  
                 }
             }
             stage ('Build') {
