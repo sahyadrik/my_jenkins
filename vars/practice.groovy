@@ -33,7 +33,7 @@ def call(body){
                 }
                 post{
                     always {
-                        junit 'target/surefire-reports/*.xml'
+                        junit '$WORKSPACE/simple-java-maven-app/target/surefire-reports/*.xml'
                     }
                 }
             }
