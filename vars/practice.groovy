@@ -42,12 +42,12 @@ def call(body){
                     }
                 }
             }
-            stage ('Deployment_Confirmation') {
-                steps {
-                    echo "Delivering the product"
-                    sh '$REPO_PATH/jenkins/scripts/deliver.sh -p $TARGET_F_PATH'
-                }
-            }
+            // stage ('Deployment_Confirmation') {
+            //     steps {
+            //         echo "Delivering the product"
+            //         sh '$REPO_PATH/jenkins/scripts/deliver.sh -p $TARGET_F_PATH'
+            //     }
+            // }
             stage ('Deploy') {
                 steps {
                     echo "Deploying the package to Tomcat"
