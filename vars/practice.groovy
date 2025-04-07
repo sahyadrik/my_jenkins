@@ -5,6 +5,7 @@ def call(body){
             GIT_ACCOUNT = credentials('Git')
         }
         stages{
+            cleanWs()
             stage ('Checkout') {
                 steps {
                     echo "Checking out the git repository"
