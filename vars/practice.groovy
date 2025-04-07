@@ -8,13 +8,18 @@ def call(body){
             stage ('Checkout') {
                 steps {
                     echo "Checking out the git repository"
-                    echo $GIT_ACCOUNT
-                    sh "git clone --recursive https://github.com/sahyadrik/my_jenkins.git"  
+                    sh "git clone --recursive https://github.com/sahyadrik/simple-java-maven-app.git"  
                 }
             }
             stage ('Build') {
                 steps {
                     echo "Building with maven"
+                    sh """
+                        cd $WORKSPACE/simple-java-maven-app
+                        pwd
+                        mvn -B -DskipTests clean package
+
+                    """
                 }
             }
             stage ('Test') {
