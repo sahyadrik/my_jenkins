@@ -4,10 +4,10 @@ def call(body){
         environment{
             GIT_ACCOUNT = credentials('Git')
         }
-        stages{
-            cleanWs()
+        stages{            
             stage ('Checkout') {
                 steps {
+                    cleanWs()
                     echo "Checking out the git repository"
                     sh "git clone --recursive https://github.com/sahyadrik/simple-java-maven-app.git"  
                 }
