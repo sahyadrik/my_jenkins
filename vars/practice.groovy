@@ -1,6 +1,9 @@
 def call(body){
     pipeline{
         agent{ label 'node_1'}
+        options {
+            skipStagesAfterUnstable()
+        }
         environment{
             GIT_ACCOUNT = credentials('Git')
         }
@@ -37,9 +40,10 @@ def call(body){
                     }
                 }
             }
-            stage ('Deploy') {
+            stage ('Deliver') {
                 steps {
-                    echo "Deploying the package to the artifactory"
+                    echo "Delivering the product"
+                    sh './jenkins/scripts/deliver.sh'
                 }
             }
         }
