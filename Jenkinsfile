@@ -1,2 +1,2 @@
-@Library('my-shared-library') _
+@Library('my-shared-library@main') _
 My-Shared-Library-CI{}
