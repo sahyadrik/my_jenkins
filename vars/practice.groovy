@@ -20,7 +20,7 @@ def call(body){
             }
             stage ('Deploy') {
                 steps {
-                    echo "Deploying out the git repository"
+                    echo "Deploying the package to the artifactory"
                 }
             }
         }
