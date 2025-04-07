@@ -25,6 +25,12 @@ def call(body){
             stage ('Test') {
                 steps {
                     echo "Running the Tests"
+                    sh ' /opt/maven/bin/mvn test '
+                }
+                post{
+                    always {
+                        junit 'target/surefire-reports/*.xml'
+                    }
                 }
             }
             stage ('Deploy') {
