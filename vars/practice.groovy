@@ -57,9 +57,10 @@ def call(body){
                             echo "Deploying \$WAR_FILE to Tomcat..."
 
                             curl -v -u \$TOMCAT_USER:\$TOMCAT_PASS \\
-                            -X POST \\
                             -F "war=@\$WAR_FILE" \\
-                            "http://batman.local:8080/manager/text/deploy?path=/myapp&update=true"
+                            -F "path=/myapp" \\
+                            -F "update=true" \\
+                            "http://batman.local:8080/manager/text"
                         """
                     }
                 }
