@@ -48,18 +48,19 @@ def call(body){
             //         sh '$REPO_PATH/jenkins/scripts/deliver.sh -p $TARGET_F_PATH'
             //     }
             // }
-            stage ('Deploy') {
+            stage('Deploy') {
                 steps {
                     echo "Deploying the package to Tomcat"
-                    withCredentials ([usernamePassword(credentialsId:'tomcat_pi', usernameVariable: 'TOMCAT_USER', passwordVariable: 'TOMCAT_PASS')]) {
-                    sh """
-                        WAR_FILE=\$(ls $TARGET_F_PATH/*.war | head -n 1)
-                        echo "Deploying \$WAR_FILE to Tomcat..."
+                    withCredentials([usernamePassword(credentialsId: 'tomcat_pi', usernameVariable: 'TOMCAT_USER', passwordVariable: 'TOMCAT_PASS')]) {
+                        sh """
+                            WAR_FILE=\$(ls $TARGET_F_PATH/*.war | head -n 1)
+                            echo "Deploying \$WAR_FILE to Tomcat..."
 
-                        curl -v --upload-file \$WAR_FILE \
-                        "http://batman.local:8080/manager/text/deploy?path=/myapp&update=true" \
-                        --user \$TOMCAT_USER:\$TOMCAT_PASS
-                    """
+                            curl -v -u \$TOMCAT_USER:\$TOMCAT_PASS \\
+                            -X POST \\
+                            -F "war=@\$WAR_FILE" \\
+                            "http://batman.local:8080/manager/text/deploy?path=/myapp&update=true"
+                        """
                     }
                 }
             }
