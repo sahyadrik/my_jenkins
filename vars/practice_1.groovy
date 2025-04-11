@@ -7,7 +7,8 @@ def call(body){
         environment{
             GIT_ACCOUNT = credentials('Git')
             REPO_PATH = "$WORKSPACE/maven-practice1"
-            TARGET_F_PATH = "$WORKSPACE/maven-practice1/target"
+            TARGET_PATH = "$WORKSPACE/maven-practice1/webapp/target"
+            TOMCAT_PATH = "/var/lib/tomcat10/webapps/webapp.war"
         }
         stages{            
             stage ('Checkout') {
@@ -48,23 +49,22 @@ def call(body){
             //         sh '$REPO_PATH/jenkins/scripts/deliver.sh -p $TARGET_F_PATH'
             //     }
             // }
-            // stage('Deploy') {
-            //     steps {
-            //         echo "Deploying the package to Tomcat"
-            //         withCredentials([usernamePassword(credentialsId: 'tomcat_pi', usernameVariable: 'TOMCAT_USER', passwordVariable: 'TOMCAT_PASS')]) {
-            //             sh """
-            //                 WAR_FILE=\$(ls $TARGET_F_PATH/*.war | head -n 1)
-            //                 echo "Deploying \$WAR_FILE to Tomcat..."
-
-            //                 curl -v -u \$TOMCAT_USER:\$TOMCAT_PASS \\
-            //                 -F "war=@\$WAR_FILE" \\
-            //                 -F "path=/myapp" \\
-            //                 -F "update=true" \\
-            //                 "http://batman.local:8080/manager/text"
-            //             """
-            //         }
-            //     }
-            // }
+            stage('Deploy') {
+                steps {
+                    echo "Deploying the package to Tomcat"
+                        sh """
+                        sudo rm -rf TOMCAT_PATH
+                        sudo cp $TARGET_PATH/webapp.war
+                        sudo systemctl restart tomcat10
+                        """
+                    }
+                    post {
+                        def webAppUrl = 'http://batmanubuntu:8080/webapp'
+                        currentBuild.description = "Access the web application here: \
+                        <a href='${webAppUrl}' target='_blank'>WebApp</a>"
+                    }
+                }
+            }
         }
     }
 }
