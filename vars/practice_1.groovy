@@ -8,7 +8,7 @@ def call(body){
             GIT_ACCOUNT = credentials('Git')
             REPO_PATH = "$WORKSPACE/maven-practice1"
             TARGET_PATH = "$WORKSPACE/maven-practice1/webapp/target"
-            TOMCAT_PATH = "/var/lib/tomcat10/webapps/webapp.war"
+            TOMCAT_PATH = "/var/lib/tomcat10/webapps"
         }
         stages{
             stage ('Checkout') {
@@ -47,8 +47,8 @@ def call(body){
                 steps {
                     echo "Deploying the package to Tomcat"
                     sh """
-                        sudo rm -rf TOMCAT_PATH
-                        sudo cp $TARGET_PATH/webapp.war
+                        sudo rm -rf $TOMCAT_PATH/webapp.war 
+                        sudo cp  $TARGET_PATH/webapp.war $TOMCAT_PATH
                         sudo systemctl restart tomcat10
                     """
                 }
