@@ -8,6 +8,7 @@ def call(body){
             GIT_ACCOUNT = credentials('Git')
             REPO_PATH = "$WORKSPACE/maven-practice1"
             TARGET_F_PATH = "$WORKSPACE/maven-practice1/target"
+            REPORTS_PATH = "maven-practice1/server/target/surefire-reports/*.xml"
         }
         stages{            
             stage ('Checkout') {
@@ -38,7 +39,7 @@ def call(body){
                 }
                 post{
                     always {
-                        junit 'simple-java-maven-app/target/surefire-reports/*.xml'
+                        junit '$REPORTS_PATH'
                     }
                 }
             }
