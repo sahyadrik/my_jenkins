@@ -10,7 +10,7 @@ def call(body){
             TARGET_PATH = "$WORKSPACE/maven-practice1/webapp/target"
             TOMCAT_PATH = "/var/lib/tomcat10/webapps/webapp.war"
         }
-        stages{            
+        stages{
             stage ('Checkout') {
                 steps {
                     cleanWs()
@@ -46,13 +46,13 @@ def call(body){
             stage('Deploy') {
                 steps {
                     echo "Deploying the package to Tomcat"
-                        sh """
+                    sh """
                         sudo rm -rf TOMCAT_PATH
                         sudo cp $TARGET_PATH/webapp.war
                         sudo systemctl restart tomcat10
-                        """
-                    }
-                post {
+                    """
+                }
+                post{
                     always {
                         def webAppUrl = 'http://batmanubuntu:8080/webapp'
                         currentBuild.description = "Access the web application here: \
