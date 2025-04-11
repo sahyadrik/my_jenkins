@@ -59,7 +59,6 @@ def call(body){
                         <a href='${webAppUrl}' target='_blank'>WebApp</a>"
                     }
                 }
-                }
             }
         }
     }
