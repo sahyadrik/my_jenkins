@@ -56,8 +56,7 @@ def call(body){
                     always {
                         script{
                             def webAppUrl = 'http://batmanubuntu:8080/webapp'
-                            currentBuild.description = "Access the web application here: \
-                            <a href='${webAppUrl}' target='_blank'>WebApp</a>"
+                            currentBuild.description = "Access the web application here: ${webAppUrl}"
                         }
                     }
                 }
