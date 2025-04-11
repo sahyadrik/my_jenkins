@@ -55,7 +55,7 @@ def call(body){
                 post{
                     success {
                         script{
-                            def webAppUrl = 'http://batmanubuntu:8080/webapp'
+                            def webAppUrl = 'http://batman:8080/webapp'
                             currentBuild.description = "Access the web application here: ${webAppUrl}"
                         }
                     }
