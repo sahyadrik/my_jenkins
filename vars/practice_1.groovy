@@ -39,7 +39,7 @@ def call(body){
                 }
                 post{
                     always {
-                        junit '$REPORTS_PATH'
+                        junit '${REPORTS_PATH}'
                     }
                 }
             }
